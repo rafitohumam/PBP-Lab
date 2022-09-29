@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Rafito Humam Abrar - 2106633626</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+      </div>
+    </div>
+  </nav>
+
+<style>
+    table, th, td {
+    border: 1px solid rgb(0, 0, 0);
+    }
+    tr {background-color: rgba(0, 0, 0, 0.395);}
+  
+    body{
+      color: rgb(255, 255, 255);
+    }
+</style>
+
 <h5>Nama: </h5>
 <p>{{nama}}</p>
 
-<table>
+<table class="center">
     <tr>
     <th>Nama Barang</th>
     <th>Harga Barang</th>
@@ -17,9 +38,8 @@
         <th>{{barang.harga_barang}}</th>
         <th>{{barang.deskripsi}}</th>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
 
 {% endblock content %}
