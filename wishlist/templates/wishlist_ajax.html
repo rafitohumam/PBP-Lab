@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<script>
+<script type="text/javascript">
+    function yaa(event) {
+        event.preventDefault()
+        $.post("/ajax?submit/",
+            {
+                nama_barang: document.getElementById('nama_barang').value,
+                harga: document.getElementById('harga_barang').value,
+                deskirpsi: document.getElementById('deskripsi_barang').value,
+            },
+    };
+    return false;
+</script>
+<script type="text/javascript">
+    function refresh() {
+        $.ajax({
+            type: :"GET",
+            url: "wishlist/json/",
+            dataType: "json",
+            sucess: function (data) {
+                the_data = data
+            }
+        })
+        return the_data;
+    }
+
+    function refresh2() {
+        var the_data = refresh();
+        var itemHtml = "<table> <tr> <th>Nama Barang</th> <th>Harga Barang</th> <jsonth>Deskripsi</th> </tr>"
+        for (var = i = 0; the_data.length; i++) {
+            var item = the_data[i].fields;
+            itemHtml += '<tr> <th>' + item.nama_barang + '</th> <th>' + item.harga_barang + '</th> <th>' + item.deskripsi + '</th> </tr>';
+        }
+        itemHtml += "</table>"
+</script>
+{% endblock meta %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Rafito Humam Abrar - 2106633626</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+      </div>
+    </div>
+  </nav>
+<style>
+    table, th, td {
+    border: 1px solid rgb(0, 0, 0);
+    }
+    tr {background-color: rgba(0, 0, 0, 0.395);}
+    body{
+      color: rgb(255, 255, 255);
+    }
+</style>
+
+<h5>Nama: </h5>
+<p>{{nama}}</p>
+<br>
+<form method="POST" id="formnya" onsubmit="return yaa()">
+    {% csrf_token %}
+    <label> for="nama_barang">Nama Barang:</label><br>
+    <input id="nama_barang" type="text" name="nama_barang"><br>
+    <label> for="harga_barang">Harga Barang:</label><br>
+    <input id="harga_barang" type="number" name="harga_barang"><br>
+    <label> for="deskripsi">Deskripsi:</label><br>
+    <input id="deskripsi" type="text" name="deskripsi"><br>
+    <button type="submit">Submit</button>
+</form>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+{% endblock content %}
