@@ -57,17 +57,18 @@
       color: rgb(255, 255, 255);
     }
 </style>
-
 <h5>Nama: </h5>
 <p>{{nama}}</p>
 <br>
+<button onclick="refresh2()">get data</button>
+<br>
 <form method="POST" id="formnya" onsubmit="return yaa()">
     {% csrf_token %}
-    <label> for="nama_barang">Nama Barang:</label><br>
+    <label for="nama_barang">Nama Barang:</label><br>
     <input id="nama_barang" type="text" name="nama_barang"><br>
-    <label> for="harga_barang">Harga Barang:</label><br>
+    <label for="harga_barang">Harga Barang:</label><br>
     <input id="harga_barang" type="number" name="harga_barang"><br>
-    <label> for="deskripsi">Deskripsi:</label><br>
+    <label for="deskripsi">Deskripsi:</label><br>
     <input id="deskripsi" type="text" name="deskripsi"><br>
     <button type="submit">Submit</button>
 </form>
